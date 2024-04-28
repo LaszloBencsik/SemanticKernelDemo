@@ -134,7 +134,7 @@
             // 
             AutoScaleDimensions = new SizeF(20F, 48F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2875, 1519);
+            ClientSize = new Size(2881, 1528);
             Controls.Add(label3);
             Controls.Add(label4);
             Controls.Add(label2);
@@ -143,10 +143,9 @@
             Controls.Add(textBoxLog);
             Controls.Add(textBoxHistory);
             Controls.Add(textBoxInput);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "FormLightingDemo";
-            Text = "Form1";
+            Text = "Semantic Kernel Demo for Azure Open AI - Lighting Copilot";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

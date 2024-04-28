@@ -62,10 +62,30 @@ Update service enpoint and service key parameters from your azure portal:
 Do not publish your service key. Use secret solutions in your project, example Azure Key Vault.
     (https://learn.microsoft.com/en-us/azure/key-vault/general/basic-concepts)
  
-### 6. Build and run your application
+### 6. Review Kernel Functions in LightPlugin.cs
+
+``` csharp
+    [Description("Gets the state of the light.")]
+    public string GetState()
+
+    [Description("Changes the state of the light.'")]
+    public string ChangeState(bool newState)
+
+    [Description("Gets the color of the light.")]
+    public string GetColor()
+
+    [Description("Changes the color of the light.'")]
+    public string ChangeColor(string newColor)
+
+    [Description("Gets the supported colors of the lamp.'")]
+    public string GetColorList()
+```
+
+### 7. Build and run your application
 
 write instructions into the TextBox "prompt:"  
 > "turn on the light"  
 > "is the light on?"  
 > "toggle the lamp"  
-
+> "change to color of the lamp to Red"
+> "change to color of the lamp to xxxx"

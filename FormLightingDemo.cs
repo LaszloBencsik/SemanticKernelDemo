@@ -24,13 +24,18 @@ namespace DesignCopilotDemo
         {
             if (text is not null)
             {
-                queue.Enqueue(text);
+                logQueue.Enqueue(_promptCount.ToString() + "> " + DateTime.Now.ToString("HH:mm:ss.fff") + " " + text);
             }
         }
         // ------------------------------------------------------------------------
         public void setTheLight(bool lightState)
         {
             _lightState = lightState;
+        }
+        // ------------------------------------------------------------------------
+        public void setTheColor(Color? color)
+        {
+            _color = color;
         }
         // ------------------------------------------------------------------------
         #endregion
@@ -50,6 +55,8 @@ namespace DesignCopilotDemo
         // ------------------------------------------------------------------------
         private async void processQuestion(string question)
         {
+            addLog("User prompted: " + question);
+            textBoxHistory.Text += _promptCount.ToString() + "> " + question + Environment.NewLine;
             history.AddUserMessage(question);
 
             var result = await chatCompletionService.GetChatMessageContentAsync(
@@ -58,9 +65,11 @@ namespace DesignCopilotDemo
                 kernel: kernel);
 
             textBoxHistory.Text += result + Environment.NewLine;
+            history.AddMessage(result.Role, result.Content ?? string.Empty);
+            addLog("Assistant finished");
+            _promptCount++;
             textBoxInput.Enabled = true;
             textBoxInput.Focus();
-            history.AddMessage(result.Role, result.Content ?? string.Empty);
         }
         // ------------------------------------------------------------------------
         private void textBoxInput_KeyDown(object sender, KeyEventArgs e)
@@ -70,7 +79,6 @@ namespace DesignCopilotDemo
                 var userInput = textBoxInput.Text;
                 textBoxInput.Text = "";
                 textBoxInput.Enabled = false;
-                textBoxHistory.Text += "> " + userInput + Environment.NewLine;
                 processQuestion(userInput);
             }
         }
@@ -78,18 +86,25 @@ namespace DesignCopilotDemo
         private void timer1_Tick(object sender, EventArgs e)
         {
             string? text;
-            while (!queue.IsEmpty && queue.TryDequeue(out text) && text is not null)
+            while (!logQueue.IsEmpty && logQueue.TryDequeue(out text) && text is not null)
             {
                 textBoxLog.Text += text + Environment.NewLine;
             }
             panelLight.Visible = _lightState;
+            if (_color is not null)
+            {
+                panelLight.BackColor = _color.Value;
+                _color = null;
+            }
         }
         // ------------------------------------------------------------------------
         #endregion
 
         #region Private properties
-        ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
-        private bool _lightState = false;
+        ConcurrentQueue<string> logQueue = new ConcurrentQueue<string>();
+        int _promptCount = 1;
+        bool _lightState = false;
+        Color? _color = null;
         Kernel kernel;
         IChatCompletionService chatCompletionService;
         ChatHistory history = new ChatHistory();
