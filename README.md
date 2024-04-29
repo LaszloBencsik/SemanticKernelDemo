@@ -14,6 +14,7 @@ interoperates with [Large Langueges models](https://learn.microsoft.com/en-us/tr
 and chnages the color of a panel control left side on the demo window.
 You can write commands or questions in natural language in the textbox at the bottom.
 There is a text log area at the right side showing called plugin functions while kernel orchestrates your ask.
+![ScreenShot](/Screenshot1.png)
 
 ## Step by step guide to prepare your demo environment:
 
