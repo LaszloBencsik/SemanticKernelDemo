@@ -77,7 +77,7 @@ namespace DesignCopilotDemo
             if (e.KeyData == Keys.Enter)
             {
                 var userInput = textBoxInput.Text;
-                textBoxInput.Text = "";
+                textBoxInput.Text = null;
                 textBoxInput.Enabled = false;
                 processQuestion(userInput);
             }
@@ -90,12 +90,30 @@ namespace DesignCopilotDemo
             {
                 textBoxLog.Text += text + Environment.NewLine;
             }
-            panelLight.Visible = _lightState;
-            if (_color is not null)
+            if (_lightState)
             {
-                panelLight.BackColor = _color.Value;
-                _color = null;
+                if (_color is not null)
+                {
+                    pictureBoxLamp.BackColor = _color.Value;
+                    _color = null;
+                }
+                else
+                {
+                    if (pictureBoxLamp.BackColor == Color.Black)
+                    {
+                        pictureBoxLamp.BackColor = Color.White;
+                    }
+                }
             }
+            else
+            {
+               pictureBoxLamp.BackColor = Color.Black;
+            }
+        }
+        // ------------------------------------------------------------------------
+        private void FormLightingDemo_Load(object sender, EventArgs e)
+        {
+            //textBoxInput.Focus();
         }
         // ------------------------------------------------------------------------
         #endregion

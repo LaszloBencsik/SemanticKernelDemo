@@ -5,7 +5,7 @@ using System.ComponentModel;
 public class LightPlugin
 {
     public bool IsOn { get; set; } = false;
-    public string ColorName { get; set; } = "White";
+    public string ColorName { get; set; } = "white";
 
     #region Private methods and properties
     private static FormLightingDemo gui { get { return DesignCopilotDemo.FormLightingDemo.Instance; } }
@@ -56,18 +56,20 @@ public class LightPlugin
     [Description("Changes the color of the light.'")]
     public string ChangeColor(string newColor)
     {
+        newColor = newColor.ToLower();
         if (newColor != ColorName)
         {
             switch (newColor)
             {
-                case "White": gui.setTheColor(Color.White); break;
-                case "Red": gui.setTheColor(Color.Red); break;
-                case "Green": gui.setTheColor(Color.Green); break;
-                case "Blue": gui.setTheColor(Color.Blue); break;
+                case "white": gui.setTheColor(Color.White); break;
+                case "red": gui.setTheColor(Color.Red); break;
+                case "green": gui.setTheColor(Color.Green); break;
+                case "blue": gui.setTheColor(Color.Blue); break;
                 default:
                     gui.addLog($"ChangeColor({newColor}) - {newColor} is not supprted");
                     return ColorName;
             }
+            ColorName = newColor;
             gui.addLog($"ChangeColor({newColor}) - Color is turning from {ColorName} to {newColor}");
         }
         else
@@ -83,7 +85,7 @@ public class LightPlugin
     [Description("Gets the supported colors of the lamp.'")]
     public string GetColorList()
     {
-        string colorList = "White, Red, Green, Blue";
+        string colorList = "white, red, green, blue";
         gui.addLog($"GetColorList() - returns: {colorList}");
         return colorList;
     }

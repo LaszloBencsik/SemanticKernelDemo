@@ -5,7 +5,15 @@
 | Application type:  |  Windows Application (WinForm)    
 | Target framework:  |  .NET 8.0  
 | Source code:  |     C#  
-| Environment:  |     Visual Studio or Visual Studio Code  
+| Environment:  |     Visual Studio or Visual Studio Code
+
+This demo help you start developing your own copilot with [Sementic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/)
+using Azure Open AI services.
+C# class LightPlugin is a very simple [plugin](https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/?tabs=Csharp) 
+interoperates with [Large Langueges models](https://learn.microsoft.com/en-us/training/modules/introduction-large-language-models/)
+and chnages the color of a panel control left side on the demo window.
+You can write commands or questions in natural language in the textbox at the bottom.
+There is a text log area at the right side showing called plugin functions while kernel orchestrates your ask.
 
 ## Step by step guide to prepare your demo environment:
 
@@ -20,6 +28,8 @@ Option #B: create free Azure subscrition: (https://azure.microsoft.com/en-us/fre
 
 Direct link to create: (https://portal.azure.com/#create/Microsoft.CognitiveServicesOpenAI)  
 Guide: (https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource)  
+
+You may need to [apply](https://aka.ms/oai/access) for access to Azure OpenAI.
 
 ### 3. Deploy Azure Open AI model
 
@@ -89,3 +99,4 @@ write instructions into the TextBox "prompt:"
 > "toggle the lamp"  
 > "change to color of the lamp to Red"
 > "change to color of the lamp to xxxx"
+> "what colors are supported by the lamp?"
